@@ -1,10 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
-import RootContainer from "./components/RootContainer";
+import './App.scss';
+import MainTopSongsView from "./components/MainTopSongsView";
+import React from "react";
 
 function App() {
   return (
-    <RootContainer/>
+      <MainTopSongsView/>
   );
 }
 
