@@ -12,15 +12,17 @@ class MainTopSongsView extends React.Component {
         super(props);
 
         this.state = {
-            loadedSongs: new Map(),
+            loadedSongs: [],
             savedSongs: [],
-            savedCount: 0,
+            savedSongsNum: 0,
 
+            lastUpdated: '',
             cachedMaxAge: Number.POSITIVE_INFINITY,
         }
 
         this.loadSongs = this.loadSongs.bind(this);
         this.handleSavedDisplay = this.handleSavedDisplay.bind(this);
+        this.savedSongsNum = this.savedSongsNum.bind(this);
     }
 
     componentDidMount() {
@@ -41,9 +43,9 @@ class MainTopSongsView extends React.Component {
                         cachedMaxAge: tempAge[0],
                         lastUpdated: response.data.feed.updated.label,
                     })
-                    // console.log(this.state.loadedSongs);
+                    console.log(this.state.loadedSongs);
                     // console.log(this.state.cachedMaxAge);
-                    // console.log(this.state.lastUpdated);
+                    console.log(this.state.lastUpdated);
                 }else{
                     console.error('Server error ' + response.status + ' status code');
                 }
@@ -55,13 +57,22 @@ class MainTopSongsView extends React.Component {
         console.log("Hey");
     }
 
+    savedSongsNum(num){
+        this.setState({
+            savedSongsNum: num,
+        })
+    }
+
     render() {
         return(
             <div className="root-wrapper">
+                <SavedSongCounter songCount={this.state.savedSongsNum} onClick={this.handleSavedDisplay}/>
                 <h1 className="main-title">Top 100 Songs</h1>
-                <SavedSongCounter songCount={12} onClick={this.handleSavedDisplay}/>
-                {/*<SongsContainer/>*/}
-                {this.state.loadedSongs.forEach(e => console.log(e.title.label))}
+                {this.state.lastUpdated !== '' ?
+                    <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
+                    : <div/>
+                }
+                <SongsContainer songList={this.state.loadedSongs} savedSongsNum={this.savedSongsNum}/>
             </div>
         )
     }
