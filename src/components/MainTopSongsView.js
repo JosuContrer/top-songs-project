@@ -1,10 +1,12 @@
 // Main Application Container
 import React, {Component} from "react";
 import SongsContainer from "./SongsContainer";
-
-import "../styles/MainTopSongsView.scss";
 import {SavedSongCounter} from "./SavedSongCounter";
+import Container from "react-bootstrap/cjs/Container";
 import axios from "axios";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/MainTopSongsView.scss";
 
 class MainTopSongsView extends React.Component {
 
@@ -67,12 +69,14 @@ class MainTopSongsView extends React.Component {
         return(
             <div className="root-wrapper">
                 <SavedSongCounter songCount={this.state.savedSongsNum} onClick={this.handleSavedDisplay}/>
-                <h1 className="main-title">Top 100 Songs</h1>
-                {this.state.lastUpdated !== '' ?
-                    <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
-                    : <div/>
-                }
-                <SongsContainer songList={this.state.loadedSongs} savedSongsNum={this.savedSongsNum}/>
+                <Container>
+                    <h1 className="main-title">Top 100 Songs</h1>
+                    {this.state.lastUpdated !== '' ?
+                        <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
+                        : <div/>
+                    }
+                    <SongsContainer songList={this.state.loadedSongs} savedSongsNum={this.savedSongsNum}/>
+                </Container>
             </div>
         )
     }
