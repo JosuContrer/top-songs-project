@@ -10,16 +10,19 @@ class SongsContainer extends React.Component {
         super(props);
 
         this.state = {
-            tempNum: 0, //TODO: this is only temporary do it with the size of the array of songs
-
         }
 
         this.saveSong = this.saveSong.bind(this);
     }
 
-    saveSong = () =>{
-        this.state.tempNum++;
-        this.props.savedSongsNum(this.state.tempNum);
+    // Lifecycle methods
+
+    saveSong = (song, clicked) =>{
+        if(clicked){
+            this.props.saveSong(song, clicked);
+        }else{
+            this.props.saveSong(song, clicked);
+        }
     }
 
     render() {

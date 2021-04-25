@@ -24,11 +24,15 @@ class MainTopSongsView extends React.Component {
 
         this.loadSongs = this.loadSongs.bind(this);
         this.handleSavedDisplay = this.handleSavedDisplay.bind(this);
-        this.savedSongsNum = this.savedSongsNum.bind(this);
+        this.saveSong = this.saveSong.bind(this);
     }
 
+    // Lifecycle methods
     componentDidMount() {
         this.loadSongs();
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.state.savedSongs);
     }
 
     loadSongs(){
@@ -59,23 +63,37 @@ class MainTopSongsView extends React.Component {
         console.log("Hey");
     }
 
-    savedSongsNum(num){
+    saveSong(song, clicked){
+        let tempSave = [];
+        if(clicked) {
+            tempSave = [...this.state.savedSongs, song];
+        }else{
+            this.state.savedSongs.map((s, i) => {
+                if(s.id.attributes["im:id"] === song.id.attributes["im:id"]){
+                    console.log("DELETED SUCCESS " + i);
+                }else{
+                    tempSave.push(s);
+                }
+            })
+        }
+
         this.setState({
-            savedSongsNum: num,
+            savedSongs: tempSave,
+            savedSongsNum: tempSave.length,
         })
     }
 
     render() {
         return(
             <div className="root-wrapper">
-                <SavedSongCounter songCount={this.state.savedSongsNum} onClick={this.handleSavedDisplay}/>
+                <SavedSongCounter songCount={this.state.savedSongsNum} songList={this.state.savedSongs}/>
                 <Container>
                     <h1 className="main-title">Top 100 Songs</h1>
                     {this.state.lastUpdated !== '' ?
                         <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
                         : <div/>
                     }
-                    <SongsContainer songList={this.state.loadedSongs} savedSongsNum={this.savedSongsNum}/>
+                    <SongsContainer songList={this.state.loadedSongs} saveSong={this.saveSong}/>
                 </Container>
             </div>
         )
