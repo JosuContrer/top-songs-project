@@ -1,5 +1,3 @@
-import '../styles/SongsContainer.scss';
-
 export const SavedSongCounter = props => {
 
     function handleClick(){

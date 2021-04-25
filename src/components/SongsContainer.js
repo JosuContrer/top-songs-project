@@ -1,8 +1,10 @@
 // Main Application Container
 import React, {Component} from "react";
 import {SongCard} from "./SongCard";
+import Accordion from "react-bootstrap/cjs/Accordion";
 
 import "../styles/SongsContainer.scss";
+import {Card} from "react-bootstrap";
 
 class SongsContainer extends React.Component {
 
@@ -28,7 +30,7 @@ class SongsContainer extends React.Component {
     render() {
         return(
             <div className="songs-wrapper">
-                {this.props.songList.map(e => <SongCard key={e.id.attributes['im:id']} song={e} saveSong={this.saveSong}/>)}
+                {this.props.songList.map((e, i) => <SongCard key={e.id.attributes['im:id']} song={e} saveSong={this.saveSong} index={i}/>)}
             </div>
         )
     }
