@@ -46,12 +46,13 @@ class MainTopSongsView extends React.Component {
                     // response.data.feed.entry.map(value => tempSongs[value.title.label] = value);
                     this.setState({
                         loadedSongs: response.data.feed.entry,
-                        cachedMaxAge: tempAge[0],
+                        cachedMaxAgeSec: +tempAge[0] * +1000, // convert form sec to microsec
                         lastUpdated: response.data.feed.updated.label,
                     })
                     console.log(this.state.loadedSongs);
-                    // console.log(this.state.cachedMaxAge);
+                    console.log(this.state.cachedMaxAgeSec);
                     console.log(this.state.lastUpdated);
+                    setInterval(this.loadSongs, this.state.cachedMaxAgeSec);
                 }else{
                     console.error('Server error ' + response.status + ' status code');
                 }

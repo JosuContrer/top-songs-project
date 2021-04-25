@@ -35,7 +35,11 @@ export const SongCard = props => {
                     </Row>
                 </Card.Header>
                 <Accordion.Collapse eventKey={eventKey}>
-                    <Card.Body>Hey</Card.Body>
+                    <Card.Body>
+                        Price: {props.song["im:price"].label}<br/>
+                        Release Date: {props.song["im:releaseDate"].attributes.label}
+                        {/*<a href={props.link.attributes[2]}>Find on itunes </a>*/}
+                    </Card.Body>
                 </Accordion.Collapse>
             </Card>
         </Accordion>
