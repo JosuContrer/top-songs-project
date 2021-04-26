@@ -1,12 +1,12 @@
-# Top 100 Songs App
+# Top 100 Albums App
 
-This website (hosted on AWS) displays the top 100 songs based on the iTunes API.
+This website (hosted on AWS) displays the top 100 albums based on the iTunes API.
 
 **App Functionality:**
 * Responsive design
 * Background CSS animation 
 * User can tap on Album to see more information
-* "Favorite" functionality to save hearted songs
+* "Favorite" functionality to save hearted albums
 
 ## This App Built With:
 
