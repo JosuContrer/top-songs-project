@@ -1,4 +1,3 @@
-// Main Application Container
 import React, {Component} from "react";
 import Container from "react-bootstrap/cjs/Container";
 import Navbar from "react-bootstrap/cjs/Navbar";
@@ -29,6 +28,7 @@ class MainTopSongsView extends React.Component {
             savedSongs: [],
             searchSongs: [],
             savedSongsNum: 0,
+            isLoading: false,
 
             lastUpdated: '',
             cachedMaxAge: Number.POSITIVE_INFINITY,
@@ -46,6 +46,9 @@ class MainTopSongsView extends React.Component {
 
     // ITunes API request to Top 100 Songs
     loadSongs(){
+        this.setState({
+            isLoading: true,
+        })
         axios
             .get('https://itunes.apple.com/us/rss/topalbums/limit=100/json')
             .then( response => {
@@ -57,6 +60,10 @@ class MainTopSongsView extends React.Component {
                         loadedSongs: response.data.feed.entry,
                         cachedMaxAgeSec: +tempAge[0] * +1000, // convert form sec to microsec
                         lastUpdated: response.data.feed.updated.label,
+                    })
+
+                    this.setState({
+                        isLoading: false,
                     })
 
                     // Set interval to request Top 100 Songs to API after max-age cache-control directive
@@ -128,7 +135,7 @@ class MainTopSongsView extends React.Component {
                         <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
                         : <div/>
                     }
-                    <SongsContainer songList={this.state.loadedSongs} saveSong={this.saveSong}/>
+                    <SongsContainer songList={this.state.loadedSongs} isLoading={this.state.isLoading} saveSong={this.saveSong}/>
                 </Container>
             </div>
         )

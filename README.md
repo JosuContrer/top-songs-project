@@ -40,6 +40,6 @@ You will also see any lint errors in the console.
 
 ### Build App
 
-### `npm build`
+### `npm run-script build`
 
 Builds the react app into the 'build' folder.
