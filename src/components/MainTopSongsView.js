@@ -1,15 +1,10 @@
 import React, {Component} from "react";
 import Container from "react-bootstrap/cjs/Container";
-import Navbar from "react-bootstrap/cjs/Navbar";
 import axios from "axios";
-import Form from "react-bootstrap/cjs/Form";
-import FormControl from "react-bootstrap/cjs/FormControl";
-import Button from "react-bootstrap/cjs/Button";
-import Fuse from 'fuse.js';
 
 import {SongsContainer} from "./SongsContainer";
 import {SavedSongCounter} from "./SavedSongCounter";
-import {SimpleSongCard} from "./SimpleSongCard";
+import {SearchNavBar} from "./SearchNavBar";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/MainTopSongsView.scss";
@@ -36,7 +31,6 @@ class MainTopSongsView extends React.Component {
 
         this.loadSongs = this.loadSongs.bind(this);
         this.saveSong = this.saveSong.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
     }
 
     // Lifecycle methods
@@ -97,37 +91,10 @@ class MainTopSongsView extends React.Component {
         })
     }
 
-    // Handler function to perform fuse search on song list based on user input
-    handleSearch(e){
-        console.log(e.element);
-        // var fuse = new Fuse(this.state.loadedSongs, {
-        //     keys: [
-        //         {name: 'title.label',weight: 0.2}
-        //     ]
-        // });
-        // const results = fuse.search('soul');
-        // console.log(results);
-        // this.setState({
-        //     searchSongs: results,
-        // })
-    }
-
     render() {
         return(
             <div className="root-wrapper">
-                <Navbar className="nav-bar" expand="lg">
-                    <Navbar.Brand>Top Songs</Navbar.Brand>
-                    {/*<Navbar.Toggle aria-controls="responsive-navbar-nav" />*/}
-                    {/*<Navbar.Collapse id="basic-navbar-nav">*/}
-                    {/*    <Form className="justify-content-end" onSubmit={this.handleSearch} inline>*/}
-                    {/*        <Form.Control type="text" placeholder="Search" className="justify-content-end"/>*/}
-                    {/*        {this.state.searchSongs.map((e) =>*/}
-                    {/*            <SimpleSongCard s={e.item}/>*/}
-                    {/*        )}*/}
-                    {/*        <Button variant="outline-info" type="submit">Search</Button>*/}
-                    {/*    </Form>*/}
-                    {/*</Navbar.Collapse>*/}
-                </Navbar>
+                <SearchNavBar loadedSongs={this.state.loadedSongs}/>
                 <SavedSongCounter songCount={this.state.savedSongsNum} songList={this.state.savedSongs}/>
                 <Container>
                     <h1 className="main-title">Top 100 Songs</h1>
