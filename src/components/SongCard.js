@@ -11,7 +11,7 @@ export const SongCard = props => {
     const [eventKey, setEventKey] = useState('0');
 
     useEffect(() => {
-        console.log("This rendered as " + clicked);
+        // console.log("This rendered as " + clicked);
     })
 
     const handleClick = () => {
@@ -38,7 +38,6 @@ export const SongCard = props => {
                     <Card.Body>
                         Price: {props.song["im:price"].label}<br/>
                         Release Date: {props.song["im:releaseDate"].attributes.label}
-                        {/*<a href={props.link.attributes[2]}>Find on itunes </a>*/}
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

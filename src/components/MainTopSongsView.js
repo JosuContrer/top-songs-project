@@ -3,6 +3,13 @@ import React, {Component} from "react";
 import SongsContainer from "./SongsContainer";
 import {SavedSongCounter} from "./SavedSongCounter";
 import Container from "react-bootstrap/cjs/Container";
+import Navbar from "react-bootstrap/cjs/Navbar";
+import Form from "react-bootstrap/cjs/Form";
+import FormControl from "react-bootstrap/cjs/FormControl";
+import Button from "react-bootstrap/cjs/Button";
+import {SimpleSongCard} from "./SimpleSongCard";
+// import Nav from "react-bootstrap/cjs/Nav";
+import Fuse from 'fuse.js';
 import axios from "axios";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +23,7 @@ class MainTopSongsView extends React.Component {
         this.state = {
             loadedSongs: [],
             savedSongs: [],
+            searchSongs: [],
             savedSongsNum: 0,
 
             lastUpdated: '',
@@ -23,8 +31,8 @@ class MainTopSongsView extends React.Component {
         }
 
         this.loadSongs = this.loadSongs.bind(this);
-        this.handleSavedDisplay = this.handleSavedDisplay.bind(this);
         this.saveSong = this.saveSong.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     // Lifecycle methods
@@ -32,7 +40,7 @@ class MainTopSongsView extends React.Component {
         this.loadSongs();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.savedSongs);
+        // console.log(this.state.savedSongs);
     }
 
     loadSongs(){
@@ -49,19 +57,15 @@ class MainTopSongsView extends React.Component {
                         cachedMaxAgeSec: +tempAge[0] * +1000, // convert form sec to microsec
                         lastUpdated: response.data.feed.updated.label,
                     })
-                    console.log(this.state.loadedSongs);
-                    console.log(this.state.cachedMaxAgeSec);
-                    console.log(this.state.lastUpdated);
+                    // console.log(this.state.loadedSongs);
+                    // console.log(this.state.cachedMaxAgeSec);
+                    // console.log(this.state.lastUpdated);
                     setInterval(this.loadSongs, this.state.cachedMaxAgeSec);
                 }else{
                     console.error('Server error ' + response.status + ' status code');
                 }
             })
             .catch(error => console.error('Request Error => ' + error))
-    }
-
-    handleSavedDisplay(){
-        console.log("Hey");
     }
 
     saveSong(song, clicked){
@@ -84,9 +88,36 @@ class MainTopSongsView extends React.Component {
         })
     }
 
+    handleSearch(e){
+        console.log(e.element);
+        // var fuse = new Fuse(this.state.loadedSongs, {
+        //     keys: [
+        //         {name: 'title.label',weight: 0.2}
+        //     ]
+        // });
+        // const results = fuse.search('soul');
+        // console.log(results);
+        // this.setState({
+        //     searchSongs: results,
+        // })
+    }
+
     render() {
         return(
             <div className="root-wrapper">
+                <Navbar className="nav-bar" expand="lg">
+                    <Navbar.Brand>Top Songs</Navbar.Brand>
+                    {/*<Navbar.Toggle aria-controls="responsive-navbar-nav" />*/}
+                    {/*<Navbar.Collapse id="basic-navbar-nav">*/}
+                    {/*    <Form className="justify-content-end" onSubmit={this.handleSearch} inline>*/}
+                    {/*        <Form.Control type="text" placeholder="Search" className="justify-content-end"/>*/}
+                    {/*        {this.state.searchSongs.map((e) =>*/}
+                    {/*            <SimpleSongCard s={e.item}/>*/}
+                    {/*        )}*/}
+                    {/*        <Button variant="outline-info" type="submit">Search</Button>*/}
+                    {/*    </Form>*/}
+                    {/*</Navbar.Collapse>*/}
+                </Navbar>
                 <SavedSongCounter songCount={this.state.savedSongsNum} songList={this.state.savedSongs}/>
                 <Container>
                     <h1 className="main-title">Top 100 Songs</h1>

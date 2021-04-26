@@ -2,11 +2,20 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
+  min-height: 100vh;
   position: relative;
   background: linear-gradient(90deg, #F17C58, #e94584, #24AADB, #27DBB1, #FFDC18, #FF3706);
   background-size: 600% 100%;
   animation: gradient 16s linear infinite;
   animation-direction: alternate;
+
+  .nav-bar{
+    background: rgba(54, 48, 48, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(10, 10, 45, 0.37);
+    backdrop-filter: blur( 8.5px );
+    -webkit-backdrop-filter: blur( 8.5px );
+    border: 1px solid rgba(50, 41, 41, 0.18);
+  }
   
   @keyframes gradient  {
     0%{
@@ -18,20 +27,24 @@
   }
 
   .main-title{
-    color: black;
     text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 0.5px black;
 
     @media only screen and (min-width: 768px) {
-      color: green;
+      color: #ffffff;
     }
 
     @media only screen and (min-width: 1000px){
-      color: red;
+      color: #ffffff;
     }
   }
 
   .updated-title{
     font-size: 15px;
+    color: rgba(80, 80, 80, 0.49);
   }
 
   .saved-songs-container {

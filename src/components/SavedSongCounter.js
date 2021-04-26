@@ -10,7 +10,7 @@ export const SavedSongCounter = props => {
                 <div className="card">
                     <ul className="list-group list-group-flush">
                         {props.songList.map((s, i) =>
-                            <li className="list-group-item">{s.title['label']}</li>
+                            <li className="list-group-item" key={s.id.attributes['im:id']}>{s.title['label']}</li>
                         )}
                     </ul>
                 </div>
