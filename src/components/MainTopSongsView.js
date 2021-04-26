@@ -75,7 +75,7 @@ class MainTopSongsView extends React.Component {
         }else{
             this.state.savedSongs.map((s, i) => {
                 if(s.id.attributes["im:id"] === song.id.attributes["im:id"]){
-                    console.log("DELETED SUCCESS " + i);
+                    // console.log("DELETED SUCCESS " + i);
                 }else{
                     tempSave.push(s);
                 }
