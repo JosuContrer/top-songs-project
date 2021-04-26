@@ -1,20 +1,24 @@
 // Main Application Container
 import React, {Component} from "react";
-import SongsContainer from "./SongsContainer";
-import {SavedSongCounter} from "./SavedSongCounter";
 import Container from "react-bootstrap/cjs/Container";
 import Navbar from "react-bootstrap/cjs/Navbar";
+import axios from "axios";
 import Form from "react-bootstrap/cjs/Form";
 import FormControl from "react-bootstrap/cjs/FormControl";
 import Button from "react-bootstrap/cjs/Button";
-import {SimpleSongCard} from "./SimpleSongCard";
-// import Nav from "react-bootstrap/cjs/Nav";
 import Fuse from 'fuse.js';
-import axios from "axios";
+
+import {SongsContainer} from "./SongsContainer";
+import {SavedSongCounter} from "./SavedSongCounter";
+import {SimpleSongCard} from "./SimpleSongCard";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/MainTopSongsView.scss";
 
+/*
+* Top Class Component
+*   Contains the 'Top 100 Songs' list
+*/
 class MainTopSongsView extends React.Component {
 
     constructor(props) {
@@ -39,27 +43,23 @@ class MainTopSongsView extends React.Component {
     componentDidMount() {
         this.loadSongs();
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.state.savedSongs);
-    }
 
+    // ITunes API request to Top 100 Songs
     loadSongs(){
         axios
             .get('https://itunes.apple.com/us/rss/topalbums/limit=100/json')
             .then( response => {
                 if(response.status === 200){ // handle request status
-                    let tempAge = response.headers['cache-control'].match(/(\d+)/); // maximum amount of time a resource is considered fresh
+                    // Maximum amount of time a resource is considered fresh (max-age cache-control directive)
+                    let tempAge = response.headers['cache-control'].match(/(\d+)/);
 
-                    let tempSongs = [];
-                    // response.data.feed.entry.map(value => tempSongs[value.title.label] = value);
                     this.setState({
                         loadedSongs: response.data.feed.entry,
                         cachedMaxAgeSec: +tempAge[0] * +1000, // convert form sec to microsec
                         lastUpdated: response.data.feed.updated.label,
                     })
-                    // console.log(this.state.loadedSongs);
-                    // console.log(this.state.cachedMaxAgeSec);
-                    // console.log(this.state.lastUpdated);
+
+                    // Set interval to request Top 100 Songs to API after max-age cache-control directive
                     setInterval(this.loadSongs, this.state.cachedMaxAgeSec);
                 }else{
                     console.error('Server error ' + response.status + ' status code');
@@ -68,6 +68,7 @@ class MainTopSongsView extends React.Component {
             .catch(error => console.error('Request Error => ' + error))
     }
 
+    // Handler function to save song to favorite list
     saveSong(song, clicked){
         let tempSave = [];
         if(clicked) {
@@ -75,6 +76,7 @@ class MainTopSongsView extends React.Component {
         }else{
             this.state.savedSongs.map((s, i) => {
                 if(s.id.attributes["im:id"] === song.id.attributes["im:id"]){
+                    // Left this because deleted could also be cached for an undo button
                     // console.log("DELETED SUCCESS " + i);
                 }else{
                     tempSave.push(s);
@@ -88,6 +90,7 @@ class MainTopSongsView extends React.Component {
         })
     }
 
+    // Handler function to perform fuse search on song list based on user input
     handleSearch(e){
         console.log(e.element);
         // var fuse = new Fuse(this.state.loadedSongs, {

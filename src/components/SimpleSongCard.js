@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+* Simplified view of a Song Card
+*/
 export const SimpleSongCard = props => {
     return(
         <div className="simple-card-container">

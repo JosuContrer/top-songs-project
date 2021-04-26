@@ -1,19 +1,25 @@
-// Functional Component
 import React, {useEffect, useState} from 'react';
+import {Row, Col, Card, Accordion, useAccordionToggle} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart as solidHeart} from "@fortawesome/free-solid-svg-icons";
 import {faHeart as emptyHeart} from "@fortawesome/free-regular-svg-icons";
-import {Row, Col, Card, Accordion, useAccordionToggle} from "react-bootstrap";
 
+/*
+* Song Card to display song information (based on ITunes API JSON)
+*   Functionality:
+*       - Shows extra information as an accordion
+*       - Heart icon can be clicked and parent component handles click
+*/
 export const SongCard = props => {
-    // Hearted icon click
-    const [clicked, setClicked] = useState(false);
-    const [eventKey, setEventKey] = useState('0');
+    const [clicked, setClicked] = useState(false); // Heart icon toggle
+    const [eventKey, setEventKey] = useState('0'); // Event Key for accordion
 
+    // This acts similar to a life cycle method
     useEffect(() => {
         // console.log("This rendered as " + clicked);
     })
 
+    // Handler for when "heart" icon is clicked on this Song Card
     const handleClick = () => {
         setClicked(!clicked);
         props.saveSong(props.song, !clicked);
@@ -45,7 +51,11 @@ export const SongCard = props => {
     )
 }
 
+/*
+* Custom Bootstrap Toggle component for card
+*/
 function CustomToggle({ children, eventKey, props }) {
+
     const decoratedOnClick = useAccordionToggle(eventKey);
 
     return (

@@ -1,8 +1,13 @@
+/*
+* Saved Songs Button Functional Component
+*   This functional component allows users to visualize
+*   the number of songs saved. When clicked it displays
+*   the props list of songs passed by its parent.
+*/
 export const SavedSongCounter = props => {
 
-    function handleClick(){
-        document.getElementById("saved-songs-collapse").classList.toggle('show');
-    }
+    // Handler to toggle boostrap collapse component
+    const handleClick = () =>{ document.getElementById("saved-songs-collapse").classList.toggle('show');}
 
     return(
         <div className="saved-songs-container">
