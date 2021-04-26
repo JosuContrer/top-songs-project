@@ -10,7 +10,7 @@ import {faHeart as emptyHeart} from "@fortawesome/free-regular-svg-icons";
 *       - Shows extra information as an accordion
 *       - Heart icon can be clicked and parent component handles click
 */
-export const SongCard = props => {
+export const AlbumCard = props => {
     const [clicked, setClicked] = useState(false); // Heart icon toggle
     const [eventKey, setEventKey] = useState('0'); // Event Key for accordion
 
@@ -43,7 +43,8 @@ export const SongCard = props => {
                 <Accordion.Collapse eventKey={eventKey}>
                     <Card.Body>
                         Price: {props.song["im:price"].label}<br/>
-                        Release Date: {props.song["im:releaseDate"].attributes.label}
+                        Release Date: {props.song["im:releaseDate"].attributes.label}<br/>
+                        For more information <a href={props.song.id.label}>click me</a>
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

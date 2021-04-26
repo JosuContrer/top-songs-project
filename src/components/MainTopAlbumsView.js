@@ -2,18 +2,18 @@ import React, {Component} from "react";
 import Container from "react-bootstrap/cjs/Container";
 import axios from "axios";
 
-import {SongsContainer} from "./SongsContainer";
-import {SavedSongCounter} from "./SavedSongCounter";
+import {AlbumContainer} from "./AlbumContainer";
+import {SavedAlbumCounter} from "./SavedAlbumCounter";
 import {SearchNavBar} from "./SearchNavBar";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../styles/MainTopSongsView.scss";
+import "../styles/MainTopAlbumsView.scss";
 
 /*
 * Top Class Component
 *   Contains the 'Top 100 Songs' list
 */
-class MainTopSongsView extends React.Component {
+class MainTopAlbumsView extends React.Component {
 
     constructor(props) {
         super(props);
@@ -95,18 +95,18 @@ class MainTopSongsView extends React.Component {
         return(
             <div className="root-wrapper">
                 <SearchNavBar loadedSongs={this.state.loadedSongs}/>
-                <SavedSongCounter songCount={this.state.savedSongsNum} songList={this.state.savedSongs}/>
+                <SavedAlbumCounter songCount={this.state.savedSongsNum} songList={this.state.savedSongs}/>
                 <Container>
-                    <h1 className="main-title">Top 100 Songs</h1>
+                    <h1 className="main-title">Top 100 Albums</h1>
                     {this.state.lastUpdated !== '' ?
                         <h2 className="updated-title">Last Updated: {this.state.lastUpdated}</h2>
                         : <div/>
                     }
-                    <SongsContainer songList={this.state.loadedSongs} isLoading={this.state.isLoading} saveSong={this.saveSong}/>
+                    <AlbumContainer songList={this.state.loadedSongs} isLoading={this.state.isLoading} saveSong={this.saveSong}/>
                 </Container>
             </div>
         )
     }
 }
 
-export default MainTopSongsView;
+export default MainTopAlbumsView;

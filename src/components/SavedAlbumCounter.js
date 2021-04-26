@@ -4,7 +4,7 @@
 *   the number of songs saved. When clicked it displays
 *   the props list of songs passed by its parent.
 */
-export const SavedSongCounter = props => {
+export const SavedAlbumCounter = props => {
 
     // Handler to toggle boostrap collapse component
     const handleClick = () =>{ document.getElementById("saved-songs-collapse").classList.toggle('show');}
@@ -22,7 +22,7 @@ export const SavedSongCounter = props => {
             </div>
             <div className="button-container">
                 <div className="song-count">{props.songCount}</div>
-                <button className="btn btn-primary saved-songs-button" type="button" onClick={handleClick}>Saved <br/>Songs</button>
+                <button className="btn btn-primary saved-songs-button" type="button" onClick={handleClick}>Favorite <br/>Albums</button>
             </div>
         </div>
     )

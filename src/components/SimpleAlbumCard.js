@@ -3,7 +3,7 @@ import React from 'react';
 /*
 * Simplified view of a Song Card
 */
-export const SimpleSongCard = props => {
+export const SimpleAlbumCard = props => {
     return(
         <div className="simple-card-container">
             {console.log(props.s)}

@@ -1,5 +1,5 @@
 import React from "react";
-import MainTopSongsView from "./components/MainTopSongsView";
+import MainTopAlbumsView from "./components/MainTopAlbumsView";
 import './App.scss';
 
 /*
@@ -8,7 +8,7 @@ import './App.scss';
 */
 function App() {
   return (
-      <MainTopSongsView/>
+      <MainTopAlbumsView/>
   );
 }
 

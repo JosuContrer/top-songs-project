@@ -1,15 +1,15 @@
 import React from "react";
-import {SongCard} from "./SongCard";
+import {AlbumCard} from "./AlbumCard";
 import Button from "react-bootstrap/cjs/Button";
 import Spinner from "react-bootstrap/cjs/Spinner";
 
-import "../styles/SongsContainer.scss";
+import "../styles/AlbumsContainer.scss";
 
 /*
 * Song List Container
 *   Contains all songs provided by parent list
 */
-export const SongsContainer = props => {
+export const AlbumContainer = props => {
 
     /*
        Passes song to parent component from child to
@@ -37,7 +37,7 @@ export const SongsContainer = props => {
                 />
                 Loading...
                 </Button></div> : <></>}
-            {props.songList.map((e, i) => <SongCard key={e.id.attributes['im:id']} song={e} saveSong={saveSong} index={i}/>)}
+            {props.songList.map((e, i) => <AlbumCard key={e.id.attributes['im:id']} song={e} saveSong={saveSong} index={i}/>)}
         </div>
     )
 }
